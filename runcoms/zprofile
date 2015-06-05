@@ -44,7 +44,6 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
-  /home/joern/idea/bin
   $path
 )
 
@@ -66,16 +65,15 @@ fi
 #
 # Temporary Files
 #
-
 if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="/tmp/$LOGNAME"
   mkdir -p -m 700 "$TMPDIR"
 fi
-
 TMPPREFIX="${TMPDIR%/}/zsh"
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-export ANDROID_HOME=/opt/android-sdk
+# Source platform specific customizations
+if [ -f ~/.customize_zprofile ]; then
+    source ~/.customize_zprofile
+else
+    print "404: ~/.customize_zprofile not found."
+fi

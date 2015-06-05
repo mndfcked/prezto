@@ -11,9 +11,12 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-if [[ -s "$HOME/.gvm/scripts/gvm" ]]; then 
-	source "$HOME/.gvm/scripts/gvm"
+## Alias for checking the ssl certificate status
+alias checkssl="openssl s_client -connect"
+
+# Source platform specific customizations
+if [ -f ~/.customize_zshrc ]; then
+    source ~/.customize_zshrc
+else
+    print "404: ~/.customize_zshrc not found."
 fi
-
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
