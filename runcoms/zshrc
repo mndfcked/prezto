@@ -20,3 +20,10 @@ if [ -f ~/.customize_zshrc ]; then
 else
     print "404: ~/.customize_zshrc not found."
 fi
+
+alias andavail="android list sdk --no-ui --all --extended | grep -E '^id:' | awk -F '\"' '{\$1=\"\"; print \$2}'"
+
+# Source custom aliases
+if [ -f ~/.customize_aliases ]; then
+	    . ~/.customize_aliases
+fi
